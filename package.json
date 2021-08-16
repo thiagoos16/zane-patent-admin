@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build -p $PORT",
     "start": "next start -p $PORT",
     "lint": "next lint",
-    "heroku-postbuild": "yarn run build -p $PORT"
+    "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
