@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
