@@ -6,7 +6,11 @@ import { Sidebar } from "../../components/Sidebar";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Pagination } from "../../components/Pagination";
 
+import { useGeneralOrientations } from "../../hooks/useGeneralOrientationsContext";
+
 export default function GeneralOrientationsList() {
+    const { generalOrientations } = useGeneralOrientations();
+
     return (
         <Box>
             <Header />
@@ -24,6 +28,7 @@ export default function GeneralOrientationsList() {
                             fontSize="sm"
                             colorScheme="pink"
                             leftIcon={<Icon as={RiAddLine} fontSize="20"/>}
+                            href="/general_orientations/create"
                         >
                             Criar Novo
                         </Button>
@@ -38,41 +43,45 @@ export default function GeneralOrientationsList() {
                                 <Th> O que é </Th>
                                 <Th> Para que serve </Th>
                                 <Th> Tempo Médio </Th>
-                                <Th> Valores </Th>
+                                <Th>  </Th>
                                 <Th width="8"></Th>
                             </Tr>
                         </Thead>
+                        
                         <Tbody>
-                            <Tr>
-                                <Td px="6">
-                                    <Checkbox colorScheme="pink"/>
-                                </Td>
-                                <Td>
-                                    <Box>
-                                        <Text fontWeight="bold"> É isso </Text>
-                                    </Box>
-                                </Td>
-                                <Td>  
-                                    <Text fontWeight="bold"> Serve Para isso </Text>
-                                </Td>
-                                <Td>  
-                                    <Text fontWeight="bold"> 2 Meses </Text>
-                                </Td>
-                                <Td>  
-                                    <Text fontWeight="bold"> R$ 2000,00 </Text>
-                                </Td>
-                                <Td>
+                            {generalOrientations.map(orientation => (
+                                <Tr key={orientation._id}>
+                                    <Td px="6">
+                                        <Checkbox colorScheme="pink"/>
+                                    </Td>
+                                    <Td>
+                                        <Box>
+                                            <Text fontWeight="bold"> {orientation.which_is} </Text>
+                                        </Box>
+                                    </Td>
+                                    <Td>  
+                                        <Text fontWeight="bold"> {orientation.what_is_it_for} </Text>
+                                    </Td>
+                                    <Td>  
+                                        <Text fontWeight="bold"> {orientation.average_time} </Text>
+                                    </Td>
+                                    {/* <Td>  
+                                        <Text fontWeight="bold"> {orientation.values} </Text>
+                                    </Td> */}
+                                    <Td>
                                     <Button
                                         as="a"
                                         size="sm"
                                         fontSize="sm"
                                         colorScheme="purple"
                                         leftIcon={<Icon as={RiPencilLine} fontSize="16"/>}
-                                    >
+                                        href={"/general_orientations/" + orientation._id}
+                                    >      
                                         Editar
                                     </Button>
                                 </Td>
-                            </Tr>
+                                </Tr>
+                            ))}
                         </Tbody>
                     </Table>
 
