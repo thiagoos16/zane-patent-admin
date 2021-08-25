@@ -6,7 +6,11 @@ import { Sidebar } from "../../components/Sidebar";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Pagination } from "../../components/Pagination";
 
+import { useRequisiteOrientations } from "../../hooks/useRequisitesOrientationsContext";
+
 export default function RequisiteOrientationsList() {
+    const { requisiteOrientations } = useRequisiteOrientations();
+
     return (
         <Box>
             <Header />
@@ -24,6 +28,7 @@ export default function RequisiteOrientationsList() {
                             fontSize="sm"
                             colorScheme="pink"
                             leftIcon={<Icon as={RiAddLine} fontSize="20"/>}
+                            href="/requisite_orientations/create"
                         >
                             Criar Novo
                         </Button>
@@ -35,34 +40,37 @@ export default function RequisiteOrientationsList() {
                                 <Th px="6" color="gray.300" width="8">
                                     <Checkbox />
                                 </Th>
-                                <Th> Divisão Por fase </Th>
-                                <Th> Requisitos em cada fase </Th>
+                                <Th> Divisão por fase descrição </Th>
+                                <Th> Requisitos em cada fase descrição </Th>
                                 <Th width="8"></Th>
                             </Tr>
                         </Thead>
                         <Tbody>
-                            <Tr>
-                                <Td px="6">
-                                    <Checkbox colorScheme="pink"/>
-                                </Td>
-                                <Td>  
-                                    <Text fontWeight="bold"> -------- </Text>
-                                </Td>
-                                <Td>  
-                                    <Text fontWeight="bold"> -------- </Text>
-                                </Td>
-                                <Td>
-                                    <Button
-                                        as="a"
-                                        size="sm"
-                                        fontSize="sm"
-                                        colorScheme="purple"
-                                        leftIcon={<Icon as={RiPencilLine} fontSize="16"/>}
-                                    >
-                                        Editar
-                                    </Button>
-                                </Td>
-                            </Tr>
+                            {requisiteOrientations.map(requisite => (
+                                <Tr key={requisite._id}>
+                                    <Td px="6">
+                                        <Checkbox colorScheme="pink"/>
+                                    </Td>
+                                    <Td>  
+                                        <Text fontWeight="bold"> { requisite.division_description } </Text>
+                                    </Td>
+                                    <Td>  
+                                        <Text fontWeight="bold"> { requisite.requisites_description } </Text>
+                                    </Td>
+                                    <Td>
+                                        <Button
+                                            as="a"
+                                            size="sm"
+                                            fontSize="sm"
+                                            colorScheme="purple"
+                                            leftIcon={<Icon as={RiPencilLine} fontSize="16"/>}
+                                            href={"/requisite_orientations/" + requisite._id}
+                                        >
+                                            Editar
+                                        </Button>
+                                    </Td>
+                                </Tr>
+                            ))}
                         </Tbody>
                     </Table>
 

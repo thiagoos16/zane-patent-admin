@@ -28,7 +28,7 @@ export function Sidebar() {
                             <Text ml="4" fontWeight="medium"> Orientações gerais </Text>
                         </Link>
 
-                        <Link display="flex">
+                        <Link href="/requisite_orientations" display="flex">
                             <Icon as={RiGitMergeLine} fontSize="20"/>
                             <Text ml="4" fontWeight="medium"> Orientações de requisitos básicos  </Text>
                         </Link>
